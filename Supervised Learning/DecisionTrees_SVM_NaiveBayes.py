@@ -1,3 +1,5 @@
+# Project on Location Prediction using - SVM, Decision Trees , Naive Bayes
+
 from tkinter import messagebox
 from tkinter import *
 from tkinter import simpledialog
