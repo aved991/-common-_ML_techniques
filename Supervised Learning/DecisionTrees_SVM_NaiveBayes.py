@@ -74,7 +74,7 @@ def uploadDataset():
         textdata.append(clean)
         text.insert(END,clean+"\n")
     
-
+# Cleaning & Preprocessing data
 
 def preprocess():
     text.delete('1.0', END)
@@ -103,6 +103,7 @@ def preprocess():
     text.insert(END,"Total tweets used to train machine learning algorithms : "+str(len(X_train))+"\n")
     text.insert(END,"Total tweets used to test machine learning algorithms  : "+str(len(X_test))+"\n")
 
+# Training Algorithms
 def runML():
     global X, Y
     global tfidf_vectorizer
@@ -112,21 +113,30 @@ def runML():
     accuracy.clear()
     text.delete('1.0', END)
 
-    cls = GaussianNB()
+
+# Naive Bayes algorithm
+    
+    cls = GaussianNB() 
     cls.fit(X_train, y_train)
     predict = cls.predict(X_test) 
     a = accuracy_score(y_test,predict)*100
     accuracy.append(a)
     text.insert(END,"Naive Bayes Accuracy : "+str(a)+"\n\n")
 
-    cls = SVC()
+ 
+# Support Vector Machines
+    
+    cls = SVC() 
     cls.fit(X, Y)
     predict = cls.predict(X_test) 
     a = accuracy_score(y_test,predict)*100
     accuracy.append(a)
     text.insert(END,"SVM Accuracy : "+str(a)+"\n\n")
 
-    cls = DecisionTreeClassifier()
+  
+# Decision Trees Algorithm
+  
+    cls = DecisionTreeClassifier() 
     cls.fit(X, Y)
     predict = cls.predict(X_test) 
     a = accuracy_score(y_test,predict)*100
@@ -134,7 +144,9 @@ def runML():
     text.insert(END,"Decision Tree Accuracy : "+str(a)+"\n\n")
     classifier = cls
 
-    
+
+# Data Visualisation
+
 def graph():
     height = accuracy
     bars = ('Naive Bayes','SVM','Decision Tree')
@@ -143,6 +155,9 @@ def graph():
     plt.xticks(y_pos, bars)
     plt.title('Accuracy Comparison Graph')
     plt.show()
+
+
+# Prediction
 
 def predict():
     global tfidf_vectorizer
@@ -165,7 +180,8 @@ def predict():
         print(predict)
         text.insert(END,str(msg1)+" === LOCATION PREDICTED AS "+location_name[predict]+"\n\n")
         
-    
+# UI/UX using Tkinter
+
 font = ('times', 18, 'bold')
 title = Label(main, text='Location prediction on Twitter using machine learning Techniques')
 title.config(bg='gold1', fg='blue1')  
